@@ -5,6 +5,9 @@
   position: absolute;
   width: 100%;
   top: 2rem; }
+
+
+
   .site-navbar .container-fluid {
     padding-left: 7rem;
     padding-right: 7rem; }
@@ -827,7 +830,10 @@ h1, h2, h3, h4 {
 
 .section-title {
   font-size: 2rem;
-  font-weight: 700; }
+  text-align: center;
+  font-weight: 800;
+  background:#90c317 ;
+ }
 
 .section-title-sub {
   font-size: 1rem;
