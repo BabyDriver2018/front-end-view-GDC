@@ -67,7 +67,39 @@
               <h1 class="text-white font-weight-bold">Sistema de Administración de CATV</h1>
               <p>AGENCIA FIBERDIGITAL</p>
             </div>
-
+            <form method="post" class="search-jobs-form">
+              <div class="row mb-5">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                  <input type="text" class="form-control form-control-lg" placeholder="Job title, Company...">
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                  <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%" data-live-search="true"
+                    title="Select Region">
+                    <option>Anywhere</option>
+                    <option>San Francisco</option>
+                    <option>Palo Alto</option>
+                    <option>New York</option>
+                    <option>Manhattan</option>
+                    <option>Ontario</option>
+                    <option>Toronto</option>
+                    <option>Kansas</option>
+                    <option>Mountain View</option>
+                  </select>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                  <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%" data-live-search="true"
+                    title="Select Job Type">
+                    <option>Part Time</option>
+                    <option>Full Time</option>
+                  </select>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                  <button type="submit" class="btn btn-primary btn-lg btn-block text-white btn-search"><span
+                      class="icon-search icon mr-2"></span>Search Job</button>
+                </div>
+              </div>
+              
+            </form>
           </div>
         </div>
       </div>
@@ -101,150 +133,89 @@
                 aria-expanded="false" aria-controls="collapseExample">
                 Lista de Usuarios
               </a>
+              <a href="create.php">
               <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample1"
                 aria-expanded="false" aria-controls="collapseExample1">
                 Registrar Usuarios
               </button>
+              </a>
             </p>
             <div class="collapse" id="collapseExample">
               <div class="card card-body">
-                <div class="table-responsive-sm">
-                  <table>
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Contrato</th>
-                          <th scope="col">Abonado</th>
-                          <th scope="col">Propiedad</th>
-                          <th scope="col">Sector</th>
-                          <th scope="col">Estado</th>
-                          <th scope="col">Pago Mes</th>
-                          <th scope="col">Servicio</th>
-                          <th scope="col">Agencia</th>
-                          <th scope="col">Deuda</th>
-                          <th scope="col">Pagar</th>
+                <?php
+                
+                 // Include config file
+                 require_once "config.php";
+                 
+                 // Attempt select query execution
+                 $sql = "SELECT * FROM users";
+                 if($result = mysqli_query($link, $sql)){
+                     if(mysqli_num_rows($result) > 0){
+                         echo "<table class='table table-bordered table-striped'>";
+                             echo "<thead>";
+                                 echo "<tr>";
+                                     echo "<th>#</th>";
+                                     echo "<th>Contrato</th>";
+                                     echo "<th>Abonado</th>";
+                                     echo "<th>Propiedad</th>";
+                                     echo "<th>Sector</th>";
+                                     echo "<th>Estado</th>";
+                                     echo "<th>Pago Mes</th>";
+                                     echo "<th>Servicio</th>";
+                                     echo "<th>Agencia</th>";
+                                     echo "<th>Deuda</th>";
+                                     echo "<th>Accion</th>";
+                                     echo "<th>Pagar</th>";
+                                 echo "</tr>";
+                             echo "</thead>";
+                             echo "<tbody>";
+                             while($row = mysqli_fetch_array($result)){
+                                 echo "<tr>";
+                                     echo "<td>" . $row['id'] . "</td>";
+                                     echo "<td>" . $row['contrato'] . "</td>";
+                                     echo "<td>" . $row['abonado'] . "</td>";
+                                     echo "<td>" . $row['propiedad'] . "</td>";
+                                     echo "<td>" . $row['sector'] . "</td>";
+                                     echo "<td>" . $row['estado'] . "</td>";
+                                     echo "<td>" . $row['pagomes'] . "</td>";
+                                     echo "<td>" . $row['servicio'] . "</td>";
+                                     echo "<td>" . $row['agencia'] . "</td>";
+                                     echo "<td>" . $row['deuda'] . "</td>";
+                                     echo "<td>";
+                                         echo "<a href='read.php?id=". $row['id'] ."' title='Ver' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
+                                         echo "<a href='delete.php?id=". $row['id']."' title='Eliminar' data-toggle='tooltip'><button  method='get' name='eliminar' type='button' class='btn btn-danger'>Eliminar</button></a>";
+                                         echo "<a href='update.php?id=". $row['id']."' title='Editar' data-toggle='tooltip'><button  method='get' name='edit' type='button' class='btn btn-primary'>Editar</button></a>";
+                                     echo "</td>";
+                                     echo "<td>";
+                                         echo "<a href='pay.php?id=". $row['id']."' title='Pagr' data-toggle='tooltip'><button  method='get' name='pagar' type='button' class='btn btn-primary'>Pagar</button></a>";
+                                     echo "</td";
+                                 echo "</tr>";
+                             }
+                             echo "</tbody>";                            
+                         echo "</table>";
+                         // Free result set
+                         mysqli_free_result($result);
+                     } else{
+                         echo "<p class='lead'><em>No records were found.</em></p>";
+                     }
+                 } else{
+                     echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+                 }
 
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>0002020001</td>
-                          <td>Otto Ronald Quispe</td>
-                          <td>Buenos Aires MZ K Lt 05</td>
-                          <td>H.A Jimarca</td>
-                          <td>
-
-                          </td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>0002020001</td>
-                          <td>Otto Ronald Quispe</td>
-                          <td>Buenos Aires MZ K Lt 05</td>
-                          <td>H.A Jimarca</td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>0002020001</td>
-                          <td>Otto Ronald Quispe</td>
-                          <td>Buenos Aires MZ K Lt 05</td>
-                          <td>H.A Jimarca</td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>0002020001</td>
-                          <td>Otto Ronald Quispe</td>
-                          <td>Buenos Aires MZ K Lt 05</td>
-                          <td>H.A Jimarca</td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>0002020001</td>
-                          <td>Otto Ronald Quispe</td>
-                          <td>Buenos Aires MZ K Lt 05</td>
-                          <td>H.A Jimarca</td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-                          <td>Gaaaaaaaaaaa</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </table>
-                </div>
+                 // Close connection
+                 mysqli_close($link);
+                 
+                ?>
               </div>
             </div>
             <div class="collapse" id="collapseExample1">
               <div class="card card-body">
-                <form>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                      else.</small>
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
-                  </div>
-                  <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                  </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+              
+                
               </div>
             </div>
           </div>
 
-        </div>
-
-
-        <div class="row pagination-wrap">
-          <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
-            <span>Showing 1-7 Of 43,167 Jobs</span>
-          </div>
-          <div class="col-md-6 text-center text-md-right">
-            <div class="custom-pagination ml-auto">
-              <a href="#" class="prev">Prev</a>
-              <div class="d-inline-block">
-                <a href="#" class="active">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-              </div>
-              <a href="#" class="next">Next</a>
-            </div>
-          </div>
         </div>
 
       </div>
