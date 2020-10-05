@@ -35,19 +35,29 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $input_estado = trim($_POST["estado"]);
     
         $estado = $input_estado;
-    
-    
-    // Validate pagomes
-    $input_pagomes = trim($_POST["pagomes"]);
-   
-        $pagomes = $input_pagomes;
 
     // Validate servicio
     $input_servicio = trim($_POST["servicio"]);
     
         $servicio = $input_servicio;
     
-    
+    // Validate pagomes
+    if($servicio == "Duo"){
+        $pagomes=60;
+    }
+    elseif($servicio == "Internet"){
+        $pagomes=45;
+    }
+    elseif($servicio == "Television"){
+        $pagomes=30;
+    }
+    else{
+        $pagomes=75;
+    }
+    // $input_pagomes = trim($_POST["pagomes"]);
+        
+    //     $pagomes = $input_pagomes;
+
     // Validate agencia
     $input_agencia = trim($_POST["agencia"]);
    

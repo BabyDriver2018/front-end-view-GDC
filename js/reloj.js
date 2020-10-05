@@ -65,6 +65,7 @@ function tiempo() {
    //llevar resultado al visor.		 
    visor.innerHTML = mn + " : " + sg + " : " + cs;
 }
+
 //parar el cronómetro
 // function parar() { 
 //      clearInterval(elcrono); //parar el crono

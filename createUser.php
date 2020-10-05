@@ -49,15 +49,13 @@
         </div>
         <br>
         <div class="form-group  ">
-            <label>Pago Mensual</label>
-            <input type="text" name="pagomes" class="form-control" value="<?php echo $pagomes; ?>" require>
-            
-        </div>
-        <br>
-        <div class="form-group  ">
             <label>Servicio</label>
-            <input type="text" name="servicio" class="form-control" value="<?php echo $servicio; ?>" require>
-            
+            <select name="servicio" id="servicio" value="<?php echo $servicio; ?>">
+                    <option value="Duo">Duo</option>
+                    <option value="Internet">Internet</option>
+                    <option value="Television">Televisión</option>
+                    <option value="Trio">Trio</option>
+            </select>
         </div>
         <br>
         <div class="form-group  ">
