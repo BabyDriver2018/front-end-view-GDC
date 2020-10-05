@@ -40,7 +40,11 @@
         <br>
         <div class="form-group  ">
             <label>Estado</label>
-            <input type="text" name="estado" class="form-control" value="<?php echo $estado; ?>" require>
+            
+            <select name="estado" id="estado" value="<?php echo $estado; ?>">
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+            </select>
             
         </div>
         <br>
